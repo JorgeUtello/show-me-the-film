@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getPopularMovies } from './services/tmdbService';
+import { getPopularMovies, searchMovie } from './services/tmdbService';
 import './aa.css';
 
 interface Movie {
@@ -13,24 +13,42 @@ interface Movie {
 	overview: string;
 }
 
-const TMDbApp = () => {
+interface TMDbAppProps {
+	searchQuery: string; // 🔹 texto que viene de App/Header
+}
+
+const TMDbApp = ({ searchQuery }: TMDbAppProps) => {
 	const [movies, setMovies] = useState<Movie[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		getPopularMovies()
-			.then(data => {
-				setMovies(data?.results || []); // Asegurar que siempre sea un array
-			})
-			.catch(err => {
-				console.error('Error al obtener películas populares:', err);
+		setLoading(true);
+		setError(null);
+
+		const fetchData = async () => {
+			try {
+				let data;
+
+				if (searchQuery.trim()) {
+					// 🔹 Buscar por título si hay texto
+					data = await searchMovie(searchQuery);
+				} else {
+					// 🔹 Mostrar populares si no hay texto
+					data = await getPopularMovies();
+				}
+
+				setMovies(data?.results || []);
+			} catch (err) {
+				console.error('Error al obtener películas:', err);
 				setError('Hubo un problema al cargar las películas.');
-			})
-			.finally(() => {
+			} finally {
 				setLoading(false);
-			});
-	}, []);
+			}
+		};
+
+		fetchData();
+	}, [searchQuery]); // 🔹 se ejecuta cuando cambia el texto
 
 	if (loading) return <p>Cargando películas...</p>;
 	if (error) return <p>{error}</p>;

@@ -17,3 +17,17 @@ export async function getPopularMovies(language = 'es-ES') {
   }
   return response.json();
 }
+
+export async function searchMovie(search, language = 'es-ES') {
+  const url = `${API_BASE_URL}/search/movie?query=${search}&=${language}&api_key=${API_KEY}`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Error al obtener resultados de búsqueda');
+  }
+  return response.json();
+}

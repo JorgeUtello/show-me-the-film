@@ -1,0 +1,57 @@
+.tmdb-container {
+  padding: 20px;
+}
+
+.tmdb-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.tmdb-movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.tmdb-movie-card {
+  width: 220px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tmdb-movie-title {
+  font-size: 18px;
+  text-align: center;
+  min-height: 48px;
+}
+
+.tmdb-movie-img {
+  border-radius: 5px;
+  margin-bottom: 8px;
+  width: 180px;
+  height: 270px;
+  object-fit: cover;
+}
+
+.tmdb-movie-info {
+  margin: 4px;
+  font-size: 14px;
+}
+
+.tmdb-movie-overview {
+  margin: 4px;
+  font-size: 13px;
+  text-align: justify;
+  max-height: 80px;
+  overflow: hidden;
+}
+
+.tmdb-movie-details {
+  text-align: left;
+  width: 100%;
+}

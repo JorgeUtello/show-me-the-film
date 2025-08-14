@@ -37,7 +37,6 @@ const TMDbApp = () => {
 
 	return (
 		<div className="tmdb-container">
-			<h1 className="tmdb-title">Películas</h1>
 			{movies.length === 0 ? (
 				<p>No se encontraron películas.</p>
 			) : (

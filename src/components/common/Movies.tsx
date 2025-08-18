@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getPopularMovies, searchMovie } from './services/tmdbService';
-import './aa.css';
+// Update the import path below to the correct file, e.g. './api' or './movieService'
+import { getPopularMovies, searchMovie } from '../../services/tmdbService';
 
 interface Movie {
 	id: number;
@@ -13,11 +13,11 @@ interface Movie {
 	overview: string;
 }
 
-interface TMDbAppProps {
+interface MoviesProps {
 	searchQuery: string; // 🔹 texto que viene de App/Header
 }
 
-const TMDbApp = ({ searchQuery }: TMDbAppProps) => {
+const Movies = ({ searchQuery }: MoviesProps) => {
 	const [movies, setMovies] = useState<Movie[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -98,4 +98,4 @@ const TMDbApp = ({ searchQuery }: TMDbAppProps) => {
 	);
 };
 
-export default TMDbApp;
+export default Movies;

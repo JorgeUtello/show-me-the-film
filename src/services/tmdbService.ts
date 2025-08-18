@@ -31,3 +31,16 @@ export async function searchMovie(search: string, language = 'es-ES') {
   }
   return response.json();
 }
+
+export async function getRandomMovie() {
+  const res = await fetch(`${API_BASE_URL}/movie/popular?api_key=${API_KEY}&language=es-ES&page=1`);
+  const data = await res.json();
+
+  if (!data.results || data.results.length === 0) {
+    throw new Error("No se encontraron películas.");
+  }
+
+  // elegir una película random de la lista popular
+  const randomIndex = Math.floor(Math.random() * data.results.length);
+  return data.results[randomIndex];
+}

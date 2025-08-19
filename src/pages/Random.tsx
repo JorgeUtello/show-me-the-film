@@ -78,40 +78,6 @@ const Random = () => {
 		}
 	};
 
-	// Búsqueda rápida solo por término
-	const handleQuickSearch = async (searchTerm: string) => {
-		if (!searchTerm.trim()) {
-			// Si no hay término, volver a películas populares
-			pickMultipleRandomMovies(movies, 5);
-			return;
-		}
-
-		setSearching(true);
-		setError(null);
-
-		try {
-			const data = await getRandomMovies({
-				count: 5,
-				minRating: 6,
-				maxRating: 10,
-				searchTerm: searchTerm.trim()
-			});
-
-			if (data.results.length === 0) {
-				setError(`No se encontraron películas con "${searchTerm}".`);
-				setDisplayedMovies([]);
-				return;
-			}
-
-			setDisplayedMovies(data.results);
-		} catch (err) {
-			setError('Error al buscar películas. Intenta nuevamente.');
-			setDisplayedMovies([]);
-		} finally {
-			setSearching(false);
-		}
-	};
-
 	useEffect(() => {
 		async function fetchMovies() {
 			try {
@@ -249,6 +215,7 @@ const Random = () => {
 				<div className="random-loading">
 					⏳ Buscando películas increíbles para ti...
 				</div>
+				
 			)}
 
 			{/* Mensaje de error */}
